@@ -1,0 +1,53 @@
+<?php
+
+namespace codeproject\Entities;
+
+use Illuminate\Database\Eloquent\Model;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
+
+class Project extends Model implements Transformable
+{
+    use TransformableTrait;
+
+    protected $fillable = [
+        'user_id',
+        'client_id',
+        'name',
+        'description',
+        'progress',
+        'status',
+        'due_date',
+    ];
+
+
+
+    public function files()
+    {
+        return $this->hasMany(ProjectFile::class);
+    }
+
+
+    public function note()
+    {
+        return $this->hasMany(ProjectNote::class);
+    }
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+
+
+
+
+}
+
