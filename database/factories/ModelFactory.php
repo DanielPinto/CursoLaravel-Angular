@@ -62,3 +62,20 @@ $factory->define(codeproject\Entities\ProjectFile::class, function (Faker\Genera
         'extension'=>$faker->fileExtension,
     ];
 });
+
+$factory->define(codeproject\Entities\ProjectTask::class, function (Faker\Generator $faker) {
+    return [
+        'project_id' => rand(1,10),
+        'name'=>$faker->name,
+        'start_date'=>$faker->dateTime('now'),
+        'due_date'=>$faker->dateTime('now'),
+        'status'=>rand(1,5),
+    ];
+});
+
+$factory->define(codeproject\Entities\ProjectMember::class, function (Faker\Generator $faker) {
+    return [
+        'project_id' => rand(1,10),
+        'member_id' => rand(1,10),
+    ];
+});

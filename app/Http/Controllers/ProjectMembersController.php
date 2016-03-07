@@ -2,17 +2,18 @@
 
 namespace codeproject\Http\Controllers;
 
-use codeproject\Repositories\ProjectRepository;
+use codeproject\Repositories\ProjectMemberRepository;
+use codeproject\Services\ProjectMemberService;
 use codeproject\Services\ProjectService;
 use Illuminate\Http\Request;
+
 use codeproject\Http\Requests;
 
-class ProjectController extends Controller
+class ProjectMembersController extends Controller
 {
 
-
     /**
-     * @var ProjectRepository
+     * @var ProjectMemberRepository
      */
     private $repository;
     /**
@@ -20,7 +21,14 @@ class ProjectController extends Controller
      */
     private $service;
 
-    public function __construct(ProjectService $service , ProjectRepository $repository )
+    /**
+
+
+    /**
+     * @param ProjectMemberRepository $repository
+     * @param ProjectService $service
+     */
+    public function __construct(ProjectMemberRepository $repository , ProjectService $service)
     {
 
         $this->repository = $repository;
@@ -28,14 +36,18 @@ class ProjectController extends Controller
     }
 
 
+
+
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        return $this->service->index();
+
+        return $this->service->indexMembers($id);
     }
 
     /**
@@ -54,9 +66,11 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request )
+    public function store(Request $request)
     {
-        return $this->service->create($request->all());
+
+        return $this->service->addMember($request->all());
+
     }
 
     /**
@@ -65,9 +79,9 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id , $memberId)
     {
-        return $this->service->show($id);
+        return $this->service->showMembers($id , $memberId);
     }
 
     /**
@@ -90,7 +104,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $this->service->update($request->all(), $id);
+        //
     }
 
     /**
@@ -99,46 +113,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        return $this->service->destroy($id);
-    }
-
-
-
-
-    // =========== Metodos Relacionados aos Membros dos Projetos ==============================
-
-
-
-    public function indexMember($id)
+    public function destroy($id , $memberId)
     {
 
+       return  $this->service->removeMember($memberId);
 
-
-        return $this->repository->findWhere(['project_id'=>$id]);
-
-    }
-
-
-
-
-    public function addMember(Request $request)
-    {
-
-        return $this->service->addMember($request->all());
-    }
-
-
-    public  function removeMember($id)
-    {
-        return $this->service->removeMember($id);
-    }
-
-
-
-    public function isMember($id , $memberId)
-    {
-        return $this->service->isMember($id , $memberId);
     }
 }

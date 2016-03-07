@@ -14,7 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+/*
+Route::post('oauth/access_token', function(){
 
+    return Response::Json(Authorizer::issueAccessToken());
+});
+*/
 
 Route::get('client' , 'ClientController@index');
 
@@ -38,4 +43,24 @@ Route::put('project/{id}' , 'ProjectController@update');
 
 Route::delete('project/{id}' , 'ProjectController@destroy');
 
+
+
+Route::get('project/{id}/tasks' , 'ProjectTaskController@index');
+
+Route::get('project/{id}/tasks/{noteId}' , 'ProjectTaskController@show');
+
+Route::post('project/tasks' , 'ProjectTaskController@store');
+
+Route::put('project/{id}/tasks/{noteId}' , 'ProjectTaskController@update');
+
+Route::delete('project/{id}/tasks{noteId}' , 'ProjectTaskController@destroy');
+
+
+Route::get('project/{id}/members' , 'ProjectMembersController@index');
+
+Route::get('project/{id}/members/{memberId}' , 'ProjectMembersController@show');
+
+Route::post('project/{id}/members' , 'ProjectMembersController@store');
+
+Route::delete('project/{id}/members/{memberId}' , 'ProjectMembersController@destroy');
 
