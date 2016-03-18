@@ -79,6 +79,13 @@ class CodeProjectRepositoryProvider extends ServiceProvider
         );
 
 
+        $this->app->bind(
+
+            \codeproject\Repositories\OauthClientRepository::class,
+            \codeproject\Repositories\OauthClientRepositoryEloquent::class
+        );
+
+
 
     }
 }

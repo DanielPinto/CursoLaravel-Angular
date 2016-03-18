@@ -11,6 +11,15 @@
 |
 */
 
+$factory->define(codeproject\Entities\OauthClient::class, function (Faker\Generator $faker) {
+    return [
+        'id' => $faker->name,
+        'secret' => $faker->name,
+        'name' => $faker->name,
+    ];
+});
+
+
 $factory->define(codeproject\Entities\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,

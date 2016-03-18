@@ -4,14 +4,14 @@ namespace codeproject\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use codeproject\Entities\Client;
-use codeproject\Presenters\ClientPresenter;
+use codeproject\Repositories\OauthClientRepository;
+use codeproject\Entities\OauthClient;
 
 /**
- * Class ClientRepositoryEloquent
+ * Class OauthClientRepositoryEloquent
  * @package namespace codeproject\Repositories;
  */
-class ClientRepositoryEloquent extends BaseRepository implements ClientRepository
+class OauthClientRepositoryEloquent extends BaseRepository implements OauthClientRepository
 {
     /**
      * Specify Model class name
@@ -20,7 +20,7 @@ class ClientRepositoryEloquent extends BaseRepository implements ClientRepositor
      */
     public function model()
     {
-        return Client::class;
+        return OauthClient::class;
     }
 
     /**
@@ -30,12 +30,4 @@ class ClientRepositoryEloquent extends BaseRepository implements ClientRepositor
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
-
-
-    public function presenter()
-    {
-        return ClientPresenter::class;
-    }
-
-
 }
