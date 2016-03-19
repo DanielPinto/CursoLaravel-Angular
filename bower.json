@@ -1,0 +1,29 @@
+{
+  "name": "codeproject-curso-3",
+  "description": "bower do projet",
+  "main": "",
+  "authors": [
+    "Daniel Pinto <danielsp.pinto@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/DanielPinto/CursoLaravel-Angular",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "resources/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.4.1",
+    "angular-route": "1.4.1",
+    "angular-resource": "1.4.1",
+    "angular-animate": "1.4.1",
+    "angular-messages": "1.4.1",
+    "angular-bootstrap": "^1.2.4",
+    "angular-strap": "2.2.4",
+    "bootstrap": "3.3.5"
+  }
+}
