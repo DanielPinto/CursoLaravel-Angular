@@ -8,8 +8,11 @@
 
 	@if(config::get('app.debug'))
 
+		<link href="{{asset('build/css/vendor/bootstrap.mim.css')}}" rel="stylesheet"/>
+		<link href="{{asset('build/css/vendor/bootstrap.theme.css')}}" rel="stylesheet"/>
 	@else
 
+		<link href="{{elixir(css/all.css)}}" rel="stylesheet"/>
 	@endif
 
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
@@ -70,9 +73,21 @@
 
 	@if(config::get('app.debug'))
 
+		<script src="{{asset('build/js/vendor/jquery.mim.js')}}"></script>
+		<script src="{{asset('build/js/vendor/angular.mim.js')}}"></script>
+		<script src="{{asset('build/js/vendor/angular-route.mim.js')}}"></script>
+		<script src="{{asset('build/js/vendor/angular-resource.mim.js')}}"></script>
+		<script src="{{asset('build/js/vendor/angular-animate.mim.js')}}"></script>
+		<script src="{{asset('build/js/vendor/angular-messages.mim.js')}}"></script>
+		<script src="{{asset('build/js/vendor/ui-bootstrap.mim.js')}}"></script>
+		<script src="{{asset('build/js/vendor/navbar.mim.js')}}"></script>
+
+
+
 	@else
 
+		<script src="{{elixir('js/all.js')}}"></script>
 	@endif
-	
+
 </body>
 </html>
