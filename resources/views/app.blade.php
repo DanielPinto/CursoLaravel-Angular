@@ -6,6 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Laravel</title>
 
+
+
 	@if(config::get('app.debug'))
 
 		<link href="{{asset('build/css/vendor/bootstrap.mim.css')}}" rel="stylesheet"/>
@@ -14,6 +16,8 @@
 
 		<link href="{{elixir(css/all.css)}}" rel="stylesheet"/>
 	@endif
+
+
 
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 
