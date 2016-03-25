@@ -68,6 +68,14 @@ gulp.task('copy-scripts',function(){
 
 
 
+gulp.task('watch-dev',function(){
+
+ liveReload.listen();
+ gulp.start('copy-styles','copy-scripts');
+ gulp.watch(config.assets_path + '/**',['copy-styles','copy-scripts']);
+
+});
+
 
 
 /*
