@@ -8,13 +8,13 @@
 
 
 
-	@if(config::get('app.debug'))
+	@if(Config::get('app.debug'))
 
-		<link href="{{asset('build/css/vendor/bootstrap.mim.css')}}" rel="stylesheet"/>
-		<link href="{{asset('build/css/vendor/bootstrap.theme.css')}}" rel="stylesheet"/>
+		<link href="{{asset('build/css/vendor/bootstrap.min.css')}}" rel="stylesheet"/>
+		<link href="{{asset('build/css/vendor/bootstrap-theme.min.css')}}" rel="stylesheet"/>
 	@else
 
-		<link href="{{elixir(css/all.css)}}" rel="stylesheet"/>
+		<link href="{{elixir('css/all.css')}}" rel="stylesheet"/>
 	@endif
 
 
@@ -75,16 +75,16 @@
 	<!-- Scripts -->
 
 
-	@if(config::get('app.debug'))
+	@if(Config::get('app.debug'))
 
-		<script src="{{asset('build/js/vendor/jquery.mim.js')}}"></script>
-		<script src="{{asset('build/js/vendor/angular.mim.js')}}"></script>
-		<script src="{{asset('build/js/vendor/angular-route.mim.js')}}"></script>
-		<script src="{{asset('build/js/vendor/angular-resource.mim.js')}}"></script>
-		<script src="{{asset('build/js/vendor/angular-animate.mim.js')}}"></script>
-		<script src="{{asset('build/js/vendor/angular-messages.mim.js')}}"></script>
-		<script src="{{asset('build/js/vendor/ui-bootstrap.mim.js')}}"></script>
-		<script src="{{asset('build/js/vendor/navbar.mim.js')}}"></script>
+		<script src="{{asset('build/js/vendor/jquery.min.js')}}"></script>
+		<script src="{{asset('build/js/vendor/angular.min.js')}}"></script>
+		<script src="{{asset('build/js/vendor/angular-route.min.js')}}"></script>
+		<script src="{{asset('build/js/vendor/angular-resource.min.js')}}"></script>
+		<script src="{{asset('build/js/vendor/angular-animate.min.js')}}"></script>
+		<script src="{{asset('build/js/vendor/angular-messages.min.js')}}"></script>
+		<script src="{{asset('build/js/vendor/ui-bootstrap.min.js')}}"></script>
+		<script src="{{asset('build/js/vendor/navbar.min.js')}}"></script>
 
 
 
