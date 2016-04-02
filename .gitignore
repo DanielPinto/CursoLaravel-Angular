@@ -1,5 +1,6 @@
 /vendor
 /node_modules
+/scafold-master
 Homestead.yaml
 Homestead.json
 .env
