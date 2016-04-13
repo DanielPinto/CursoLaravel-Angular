@@ -44,7 +44,7 @@ class ClientService
         try{
 
             $this->validator->with($data)->passesOrFail();
-            return $this->repository->create($data);
+            return $this->repository->skipPresenter()->create($data);
 
         }catch (ValidatorException $e) {
 
@@ -67,7 +67,7 @@ class ClientService
         try{
 
             $this->validator->with($data)->passesOrFail();
-            return $this->repository->update($data,$id);
+            return $this->repository->skipPresenter()->update($data,$id);
 
         }catch (ValidatorException $e){
 
@@ -135,7 +135,7 @@ class ClientService
 
         try{
 
-            $data =  $this->repository->all();
+            $data =  $this->repository->skipPresenter()->all();
 
             if(count($data)>0){
                 return $data;

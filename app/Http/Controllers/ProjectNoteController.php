@@ -3,6 +3,7 @@
 namespace codeproject\Http\Controllers;
 
 use codeproject\Repositories\ProjectNoteRepository;
+use codeproject\Services\ProjectNoteService;
 use Illuminate\Http\Request;
 
 use codeproject\Http\Requests;
@@ -16,10 +17,15 @@ class ProjectNoteController extends Controller
      * @var ProjectNoteRepository
      */
     private $repository;
+    /**
+     * @var ProjectNoteService
+     */
+    private $service;
 
-    public function __construct(ProjectNoteRepository $repository ){
+    public function __construct(ProjectNoteRepository $repository, ProjectNoteService $service ){
 
         $this->repository = $repository;
+        $this->service = $service;
     }
 
 
@@ -51,7 +57,7 @@ class ProjectNoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->service->create($request->all());
     }
 
     /**
