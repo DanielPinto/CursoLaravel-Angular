@@ -1,6 +1,3 @@
-angular.module('app.controllers')
-    .controller('ProjectNoteShowController',['$scope','Client',function($scope,Client){
-
-        $scope.clients = Client.query();
-
-    }]);
+/**
+ * Created by w8 on 16/04/2016.
+ */

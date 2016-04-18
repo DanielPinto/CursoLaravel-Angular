@@ -26,6 +26,8 @@ Route::post('oauth/access_token', function(){
 
 Route::get('user' , 'UserController@index');
 Route::get('user/{id}' , 'UserController@show');
+Route::get('user/authenticated' , 'UserController@authenticated');
+
 
 //
 
@@ -78,5 +80,8 @@ Route::group(['middleware'=>'oauth'],function(){
     Route::get('project/{id}/file' , 'ProjectFileController@index');
     Route::get('project/{id}/file/{idfile}' , 'ProjectFileController@show');
     Route::delete('project/{id}/file/{idfile}' , 'ProjectFileController@destroy');
+
+
+
 
 });

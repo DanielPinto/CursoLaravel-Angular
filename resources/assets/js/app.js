@@ -32,8 +32,8 @@ app.config(['$routeProvider', '$httpProvider', 'OAuthProvider',
             }
             return data;
         };
-*/
 
+*/
         $routeProvider
 
             .when('/login', {

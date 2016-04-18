@@ -6,7 +6,7 @@ use codeproject\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 use codeproject\Http\Requests;
-use codeproject\Http\Controllers\Controller;
+use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class UserController extends Controller
 {
@@ -22,6 +22,14 @@ class UserController extends Controller
 
         $this->repository = $repository;
     }
+
+
+
+    public function authenticated(){
+       $userId = Authorizer::getResourceOwnerId();
+        return $this->repository->find($userId);
+    }
+
 
     /**
      * Display a listing of the resource.

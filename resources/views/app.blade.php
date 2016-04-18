@@ -80,6 +80,9 @@
 
 	@if(Config::get('app.debug'))
 
+
+
+
 		<script src="{{asset('build/js/vendor/jquery.min.js')}}"></script>
 		<script src="{{asset('build/js/vendor/angular.min.js')}}"></script>
 		<script src="{{asset('build/js/vendor/angular-route.min.js')}}"></script>
@@ -97,6 +100,9 @@
 		<script src="{{asset('build/js/controllers/login.js')}}"></script>
 		<script src="{{asset('build/js/controllers/home.js')}}"></script>
 
+
+		<script src="{{asset('build/js/services/user.js')}}"></script>
+
 		<!--    Controllers dos Clients   -->
 		<script src="{{asset('build/js/controllers/client/clientList.js')}}"></script>
 		<script src="{{asset('build/js/controllers/client/clientNew.js')}}"></script>
@@ -105,17 +111,16 @@
 
 
 		<!--    Controllers das Notas de Projetos   -->
-		<script src="{{asset('build/js/controllers/project-note/projectNoteList.js')}}"></script>
-		<script src="{{asset('build/js/controllers/project-note/projectNoteShow.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-note/ProjectNoteList.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-note/projectNoteNew.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-note/projectNoteEdit.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-note/projectNoteShow.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-note/projectNoteRemove.js')}}"></script>
 
 
 		<!--	SERVICES   -->
 		<script src="{{asset('build/js/services/client.js')}}"></script>
 		<script src="{{asset('build/js/services/projectNote.js')}}"></script>
-
 
 
 
