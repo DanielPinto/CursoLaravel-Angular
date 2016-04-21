@@ -6,6 +6,7 @@ use codeproject\Repositories\UserRepository;
 use Illuminate\Http\Request;
 
 use codeproject\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class UserController extends Controller
@@ -28,6 +29,7 @@ class UserController extends Controller
     public function authenticated(){
        $userId = Authorizer::getResourceOwnerId();
         return $this->repository->find($userId);
+
     }
 
 
@@ -38,7 +40,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        return $this->repository->all();
+       return $this->repository->all();
+
     }
 
     /**

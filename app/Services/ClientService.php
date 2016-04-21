@@ -135,7 +135,7 @@ class ClientService
 
         try{
 
-            $data =  $this->repository->skipPresenter()->all();
+            $data =  $this->repository->all();
 
             if(count($data)>0){
                 return $data;

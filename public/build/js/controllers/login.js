@@ -19,12 +19,12 @@ angular.module('app.controllers')
 
                 OAuth.getAccessToken($scope.user).then(function () {
 
-                    $location.path('home');
-                    /*
                     User.authenticated({}, {}, function(data){
-                       $cookies.putObject('user',data);
+
+                        $cookies.putObject('user',data);
+                        $location.path('home');
                     });
-                    */
+
 
                 }, function(data) {
 
