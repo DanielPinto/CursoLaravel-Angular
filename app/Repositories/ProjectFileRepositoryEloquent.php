@@ -31,9 +31,12 @@ class ProjectFileRepositoryEloquent extends BaseRepository implements ProjectFil
     {
         $this->pushCriteria(app(RequestCriteria::class));
     }
+    
+    /*
 
     public function presenter()
     {
         return ProjectFilesPresenter::class;
     }
+*/
 }

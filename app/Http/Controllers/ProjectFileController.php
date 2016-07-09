@@ -10,6 +10,9 @@ use Illuminate\Http\Request;
 use codeproject\Http\Requests;
 use codeproject\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use codeproject\Repositories\ProjectRepository;
+use codeproject\Services\ProjectFileService;
+use SuperClosure\Analyzer\Visitor\ThisDetectorVisitor;
 
 class ProjectFileController extends Controller
 {
@@ -23,12 +26,15 @@ class ProjectFileController extends Controller
      * @var ProjectFileRepository
      */
     private $repository;
+    
+    private $projectRepository;
 
-    public function __construct(ProjectService $service , ProjectFileRepository $repository)
+    public function __construct(ProjectFileService $service , ProjectFileRepository $repository, ProjectRepository $projectRepository)
     {
 
         $this->service = $service;
         $this->repository = $repository;
+        $this->projectRepository = $projectRepository;
     }
 
     /**
@@ -59,29 +65,48 @@ class ProjectFileController extends Controller
      */
     public function store(Request $request)
     {
-
+    
         $file=$request->file('file');
         $extension=$file->getClientOriginalExtension();
-
         $data['file'] = $file;
         $data['extension'] = $extension;
         $data['name'] = $request->name;
         $data['project_id'] = $request->project_id;
         $data['description'] = $request->description;
 
-        return $this->service->createFile($data);
+        return $this->service->create($data);
+
     }
 
+    
+    public function showFile($id){
+
+    	//if($this->service-checkProjectPermission($id)==false){
+    	
+    	//	return ['error'=>'Access Forbiden'];
+    	
+    	//}
+
+    	return response()->download($this->service->getFilePath($id));
+    	
+    }
+    
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id , $fileId)
+    public function show($id)
     {
 
-        return $this->repository->findWhere(['project_id'=>$id , 'id'=>$fileId]);
+    	if($this->service-checkProjectPermission($id)==false){
+    		
+    		return ['error'=>'Access Forbiden'];
+    		
+    	}
+    	
+         return $this->repository->find($id);
     }
 
     /**
@@ -104,17 +129,30 @@ class ProjectFileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+    	if($this->service-checkProjectOwner($id)==false){
+    	
+    		return ['error'=>'Access Forbiden'];
+    	
+    	}
+    	
+    	
+        return $this->service->update($request->all(),$id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id,$idfile)
+    
+    
+    
+    
+    public function destroy($id, $idFile)
     {
-        return $this->service->destroyFile($id,$idfile);
+    	
+    	if($this->service->checkProjectOwner($idFile)==false){
+    	
+    		return ['error'=>'Access Forbiden'];
+    	
+    	}
+    	
+    	//caso apresente erro na frontEnd não retorne os dados;
+        return $this->service->delete($idFile);
     }
 }

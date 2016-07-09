@@ -21,8 +21,7 @@ class ProjectMembersController extends Controller
      */
     private $service;
 
-    /**
-
+    
 
     /**
      * @param ProjectMemberRepository $repository

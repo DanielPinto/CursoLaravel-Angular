@@ -8,10 +8,8 @@
 
 namespace codeproject\Services;
 
-use codeproject\Repositories\ProjectFileRepository;
 use codeproject\Repositories\ProjectMemberRepository;
 use codeproject\Repositories\ProjectRepository;
-use codeproject\Validators\ProjectFileValidator;
 use codeproject\Validators\ProjectMemberValidator;
 use codeproject\Validators\ProjectValidator;
 use Exception;
@@ -20,10 +18,7 @@ use Illuminate\Database\QueryException;
 
 
 use Illuminate\Filesystem\Filesystem;
-
 use Illuminate\Contracts\Filesystem\Factory as Storage;
-
-use Prettus\Validator\Exceptions\ValidatorException;
 
 
 class ProjectService
@@ -46,41 +41,20 @@ class ProjectService
      * @var ProjectMemberValidator
      */
     private $validatorMember;
-    /**
-     * @var Storage
-     */
-    private $storage;
-    /**
-     * @var Filesystem
-     */
-    private $filesystem;
-    /**
-     * @var ProjectFileRepository
-     */
-    private $repositoryFile;
-    /**
-     * @var ProjectFileValidator
-     */
-    private $fileValidator;
+  
 
     public function __construct(ProjectValidator $validator,
                                 ProjectRepository $repository,
                                 ProjectMemberRepository $repositoryMember,
-                                ProjectFileRepository $repositoryFile,
-                                ProjectMemberValidator $validatorMember,
-                                Storage $storage,
-                                Filesystem $filesystem,
-                                ProjectFileValidator $fileValidator)
+                                ProjectMemberValidator $validatorMember
+                                )
     {
 
         $this->validator = $validator;
         $this->repository = $repository;
         $this->repositoryMember = $repositoryMember;
         $this->validatorMember = $validatorMember;
-        $this->storage = $storage;
-        $this->filesystem = $filesystem;
-        $this->repositoryFile = $repositoryFile;
-        $this->fileValidator = $fileValidator;
+    
     }
 
 
@@ -426,104 +400,6 @@ class ProjectService
 
     }
 
-
-
-
-
-
-    // ++++++++++++++++++++++++ Funções relacionadas aos Files +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-    public function createFile(array $data)
-    {
-
-        try {
-
-            $this->fileValidator->with($data)->passesOrFail();
-
-            $project = $this->repository->skipPresenter()->find($data['project_id']);
-
-            $projectFile = $project->files()->create($data);
-
-            $this->storage->put($projectFile->id . "." . $data['extension'], $this->filesystem->get($data['file']));
-
-            return [
-                'success' => true,
-                'message' => 'Arquivo criado com sucesso!',
-
-            ];
-
-        } catch (ValidatorException $e) {
-
-            return [
-                'error' => true,
-                'message' => $e->getMessageBag(),
-            ];
-        } catch (QueryException $e) {
-
-            return [
-                'error' => true,
-                'message' => 'Erro ao Inserir os dados na Base!',
-            ];
-
-        } catch (\Exception $e) {
-
-            return [
-                'error' => true,
-                'message' => 'Ocorreu algum Erro',
-            ];
-        }
-
-
-    }
-
-
-    public function destroyFile($id, $idfile)
-    {
-
-        try {
-
-
-            $file = $this->repositoryFile->find($idfile);
-
-            $arq = $file->id . "." . $file->extension;
-
-            $this->storage->delete($arq);
-
-            $this->repositoryFile->delete($idfile);
-
-            return [
-                'success' => true,
-                'message' => 'Arquivo deletado com sucesso!'
-
-            ];
-
-        } catch (ModelNotFoundException $e) {
-
-            return [
-                'error' => true,
-                'message' => 'Arquivo nao Existe!.'
-            ];
-
-
-        } catch (QueryException $e) {
-
-            return [
-                'error' => true,
-                'message' => 'Erro ao deletar do banco.'
-            ];
-
-        } catch (Exception $e) {
-
-            return [
-                'error' => true,
-                'message' => 'Ocorreu algum erro ao excluir o Arquivo.'
-            ];
-
-        }
-
-
-    }
 
 
 }
