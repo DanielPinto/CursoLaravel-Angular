@@ -28,7 +28,7 @@ angular.module('app.controllers')
                 }).then(function (data,status,headers,config) {
 
 
-                    $location.path('/project/'+$routeParams.id+'/file');
+                    $location.path('/project/'+$routeParams.id+'/files');
 
                 });
 

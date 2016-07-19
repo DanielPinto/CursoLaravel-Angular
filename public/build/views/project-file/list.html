@@ -16,16 +16,18 @@
                         <tbody>
                         <tr ng-repeat="o in projectFiles">
                             <td>{{o.name}}</td>
-                            <td>{{o.description | limitTo: 25}}</td>
+                            <td>{{o.description}}</td>
                             <td>
+                                <project-file-download id-file="{{o.id}}"></project-file-download>
 
-                            <!--
-                            <project-file-download id-file="{{o.id}}"></project-file-download>
-                              -->   
+
+                                <!--
                                 <a ng-href="/project/file/{{o.id}}/download" target="_blank">
                                     Download
                                 </a> 
-                               
+                                -->
+
+
                             </td>
                             <td>
                                 <a ng-href="#/project/{{o.project_id}}/file/{{o.id}}/edit">

@@ -138,11 +138,11 @@ app.config(['$routeProvider', '$httpProvider', 'OAuthProvider',
                 controller: 'ProjectNoteRemoveController'
             })
             /*  rotas de File Upload*/
-            .when('/project/:id/file', {
+            .when('/project/:id/files', {
                 templateUrl: 'build/views/project-file/list.html',
                 controller: 'ProjectFileListController'
             })
-            .when('/project/:id/file/new', {
+            .when('/project/:id/files/new', {
                 templateUrl: 'build/views/project-file/new.html',
                 controller: 'ProjectFileNewController'
             })

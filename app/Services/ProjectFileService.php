@@ -6,11 +6,13 @@ namespace codeproject\Services;
 
 
 
+use codeproject\Entities\ProjectFile;
 use codeproject\Repositories\ProjectFileRepository;
 use codeproject\Repositories\ProjectRepository;
 use codeproject\Validators\ProjectFileValidator;
 use Illuminate\Contracts\Filesystem\Factory as Storage;
 use Illuminate\Filesystem\Filesystem;
+use Prettus\Validator\Contracts\ValidatorInterface;
 
 class ProjectFileService
 {
@@ -61,7 +63,7 @@ class ProjectFileService
 
 		try {
 		
-			$this->fileValidator->with($data)->passesOrFail();
+			$this->fileValidator->with($data)->passesOrFail(ValidatorInterface::RULE_CREATE);
 		
 			$project = $this->projectRepository->skipPresenter()->find($data['project_id']);
 		
@@ -109,7 +111,7 @@ class ProjectFileService
 
 		try{
 		
-		$this->fileValidator->with($data)->passesOrFail();
+		$this->fileValidator->with($data)->passesOrFail(ValidatorInterface::RULE_UPDATE);
 		
 		return $this->repository->update($data, $id);
 		
@@ -139,23 +141,38 @@ class ProjectFileService
 	}
 
 	
+
 	//============================================================================================
-	
+
+
+	public function getFileName($id){
+
+		$projectFile = $this->repository->skipPresenter()->find($id);
+
+		$fileName = $projectFile['id'].'.'.$projectFile['extension'];
+
+		return $fileName;
+	}
+
+
 	public function getFilePath($id){
 		
-		$projectFile = $this->repository->skipPresenter()->find($id);
-		return $this->getBaseURL($projectFile);
+		$fileName = $this->getFileName($id);
+
+		return $this->getBaseURL($fileName);
 		
 	}
 	
-	public function getBaseURL($projectFile){
+	public function getBaseURL( $fileName){
 
-		switch ($this->storage->getDefaultDrive){
-			
-			case 'local':
-					return $this->storage->getDrive()->getAdapter()->getPathPrefix().'/'.$projectFile->id.'.'.$projectFile->extension;
-		}
+
+		return  $this->storage->disk()->getAdapter()->getPathPrefix().$fileName;
+
+
 	}
+
+
+
 	
 	public function checkProjectOwner($projectFileId){
 		
@@ -241,7 +258,7 @@ class ProjectFileService
 		
 		
 
-			//caso apresente erro na frontEnd não retorne os dados;
+			//caso apresente erro na frontEnd nï¿½o retorne os dados;
 			return [
 					'success' => true,
 					'message' => 'Arquivo deletado com sucesso!'

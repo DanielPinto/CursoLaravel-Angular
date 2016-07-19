@@ -40,11 +40,12 @@ class ProjectFileController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function index($id)
     {
-        return $this->repository->findWhere(['project_id'=>$id]);
+        return  $this->repository->findWhere(['project_id'=>$id]);
     }
 
     /**
@@ -83,11 +84,24 @@ class ProjectFileController extends Controller
 
     	//if($this->service-checkProjectPermission($id)==false){
     	
-    	//	return ['error'=>'Access Forbiden'];
+    	  //  return ['error'=>'Access Forbiden'];
     	
     	//}
 
-    	return response()->download($this->service->getFilePath($id));
+        $filePath = $this->service->getFilePath($id);
+
+        $fileContent = file_get_contents($filePath);
+
+        $file64 = base64_encode($fileContent);
+
+
+
+        return [
+            'file'=>$file64,
+            'size'=>filesize($filePath),
+            'name'=>$this->service->getFileName($id),
+            'url'=>$filePath
+        ];
     	
     }
     
@@ -100,11 +114,11 @@ class ProjectFileController extends Controller
     public function show($id)
     {
 
-    	if($this->service-checkProjectPermission($id)==false){
+    	//if($this->service-checkProjectPermission($id)==false){
     		
-    		return ['error'=>'Access Forbiden'];
+    	//	return ['error'=>'Access Forbiden'];
     		
-    	}
+    	//}
     	
          return $this->repository->find($id);
     }
@@ -127,16 +141,16 @@ class ProjectFileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id , $idFile)
     {
-    	if($this->service-checkProjectOwner($id)==false){
+    	//if($this->service-checkProjectOwner($id)==false){
     	
-    		return ['error'=>'Access Forbiden'];
+    	//	return ['error'=>'Access Forbiden'];
     	
-    	}
+    	//}
     	
     	
-        return $this->service->update($request->all(),$id);
+        return $this->service->update($request->all(),$idFile);
     }
 
     
@@ -152,7 +166,7 @@ class ProjectFileController extends Controller
     	
     	}
     	
-    	//caso apresente erro na frontEnd não retorne os dados;
+    	//caso apresente erro na frontEnd nï¿½o retorne os dados;
         return $this->service->delete($idFile);
     }
 }

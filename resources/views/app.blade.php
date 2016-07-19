@@ -49,16 +49,19 @@
 
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/') }}">Welcome</a></li>
+					<li><a href="{{ url('/#/projects') }}">Projetos</a></li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/#/project/1/files') }}">Files</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
 					@if(auth()->guest())
 						@if(!Request::is('auth/login'))
-							<li><a href="{{ url('/auth/login') }}">Login</a></li>
+							<li><a href="{{ url('/#/login') }}">Login</a></li>
 						@endif
 						@if(!Request::is('auth/register'))
-							<li><a href="{{ url('/auth/register') }}">Register</a></li>
+							<li><a href="{{ url('/#/register') }}">Register</a></li>
 						@endif
 					@else
 						<li class="dropdown">
@@ -123,7 +126,7 @@
 		<!--    Controllers das Arquivos de Projetos -->
 
 		<script src="{{asset('build/js/controllers/project-file/projectFileNew.js')}}"></script>
-		<script src="{{asset('build/js/controllers/project-file/ProjectFileList.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-file/projectFileList.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-file/projectFileEdit.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-file/projectFileRemove.js')}}"></script>
 
@@ -154,6 +157,9 @@
 
 
 		<!-- DIRECTIVES-->
+
+
+
 		<script src="{{asset('build/js/directives/projectFileDownload.js')}}"></script>
 
 
