@@ -64,7 +64,7 @@ class ProjectFileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request , $id )
     {
     
         $file=$request->file('file');
@@ -80,7 +80,7 @@ class ProjectFileController extends Controller
     }
 
     
-    public function showFile($id){
+    public function showFile($id , $idFile){
 
     	//if($this->service-checkProjectPermission($id)==false){
     	
@@ -88,7 +88,7 @@ class ProjectFileController extends Controller
     	
     	//}
 
-        $filePath = $this->service->getFilePath($id);
+        $filePath = $this->service->getFilePath($idFile);
 
         $fileContent = file_get_contents($filePath);
 
@@ -99,7 +99,7 @@ class ProjectFileController extends Controller
         return [
             'file'=>$file64,
             'size'=>filesize($filePath),
-            'name'=>$this->service->getFileName($id),
+            'name'=>$this->service->getFileName($idFile),
             'url'=>$filePath
         ];
     	
@@ -111,7 +111,7 @@ class ProjectFileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id , $idFile)
     {
 
     	//if($this->service-checkProjectPermission($id)==false){
@@ -120,7 +120,7 @@ class ProjectFileController extends Controller
     		
     	//}
     	
-         return $this->repository->find($id);
+         return $this->repository->find($idFile);
     }
 
     /**

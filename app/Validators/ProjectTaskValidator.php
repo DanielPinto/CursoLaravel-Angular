@@ -16,7 +16,6 @@ class ProjectTaskValidator extends LaravelValidator
 
     Protected $rules=[
 		'name'=>'required',
-		'project_id' => 'required',
 		'start_date'=> 'required',
 		'due_date'=> 'required',
 		'status'=> 'required',

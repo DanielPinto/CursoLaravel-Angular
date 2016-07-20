@@ -19,14 +19,12 @@ class ProjectFileValidator extends LaravelValidator
 
 
 		ValidatorInterface::RULE_CREATE =>[
-		'project_id'=> 'required',
 		'name' => 'required',
 		'description'=> 'required',
 		'extension'=> 'required',
 		],
 
 		ValidatorInterface::RULE_UPDATE =>[
-			'project_id'=> 'required',
 			'name' => 'required',
 			'description'=> 'required',
 		]

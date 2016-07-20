@@ -130,7 +130,7 @@ class ProjectService
             } else {
                 return [
                     'error' => true,
-                    'message' => 'Este Projeto não Existe'
+                    'message' => 'Este Projeto nï¿½o Existe'
                 ];
             }
 
@@ -245,7 +245,7 @@ class ProjectService
     }
 
 
-//=========================== Funções relacionadas aos membros dos Projetos =========================
+//=========================== Funï¿½ï¿½es relacionadas aos membros dos Projetos =========================
 
 
     public function indexMembers($id)
@@ -399,6 +399,47 @@ class ProjectService
 
 
     }
+
+
+
+
+
+//==================== PermiÃ§Ãµes ==============================
+
+
+
+    public function checkProjectOwner($projectFileId){
+
+        $userId = \Authorizer::getResourceOwnerId();
+
+        $projectId = $this->repository->skipPresenter()->find($projectFileId)->project_id;
+
+        return $this->projectRepository->isOwner($projectId,$userId);
+    }
+
+
+
+    public function checkProjectMember($projectFileId){
+
+        $userId = \Authorizer::getResourceOwnerId();
+
+        $projectId = $this->repository->skipPresenter()->find($projectFileId)->project_id;
+
+        return $this->projectRepository->hasMember($projectId,$userId);
+    }
+
+
+    public function checkProjectPermission($projectFileId){
+
+        if ($this->checkProjectOwner($projectFileId)or $this->checkProjectMember($projectFileId)) {
+            return true;
+        }
+
+        return false;
+    }
+
+
+
 
 
 
