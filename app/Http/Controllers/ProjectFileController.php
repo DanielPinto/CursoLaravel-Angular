@@ -160,11 +160,13 @@ class ProjectFileController extends Controller
     public function destroy($id, $idFile)
     {
     	
-    	if($this->service->checkProjectOwner($idFile)==false){
+    	/*
+        if($this->service->checkProjectOwner($idFile)==false){
     	
     		return ['error'=>'Access Forbiden'];
     	
     	}
+    	*/
     	
     	//caso apresente erro na frontEnd n�o retorne os dados;
         return $this->service->delete($idFile);

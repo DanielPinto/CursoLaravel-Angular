@@ -41,6 +41,8 @@ class ProjectService
      * @var ProjectMemberValidator
      */
     private $validatorMember;
+
+
   
 
     public function __construct(ProjectValidator $validator,
@@ -123,7 +125,8 @@ class ProjectService
 
         try {
 
-            $data = $this->repository->with(['client', 'user'])->find($id);
+            //$data =
+                return $this->repository->with(['client', 'user'])->find($id);
 
             if (count($data) > 0) {
                 return $data;
@@ -414,7 +417,7 @@ class ProjectService
 
         $projectId = $this->repository->skipPresenter()->find($projectFileId)->project_id;
 
-        return $this->projectRepository->isOwner($projectId,$userId);
+        return $this->repository->isOwner($projectId,$userId);
     }
 
 
@@ -425,7 +428,7 @@ class ProjectService
 
         $projectId = $this->repository->skipPresenter()->find($projectFileId)->project_id;
 
-        return $this->projectRepository->hasMember($projectId,$userId);
+        return $this->repository->hasMember($projectId,$userId);
     }
 
 

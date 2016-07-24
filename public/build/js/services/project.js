@@ -1,7 +1,7 @@
 angular.module('app.services')
     .service('Project',['$resource','$filter','appConfig',
         function($resource,$filter,appConfig){
-            return $resource(appConfig.baseUrl + '/project/:id',{id: '@id'},
+            return $resource(appConfig.baseUrl + '/projects/:id',{id: '@id'},
                 {
                     get:{
                         method: 'GET',
@@ -23,7 +23,7 @@ angular.module('app.services')
 
                     /* subscreve o metodo save para formatar a data antes de enviar apara a API
 
-                     continu a configuração no arquivo app.js
+                     continu a configuraï¿½ï¿½o no arquivo app.js
 
 
                      save:{

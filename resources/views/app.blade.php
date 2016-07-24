@@ -116,20 +116,19 @@
 
 
 		<!--    Controllers das Notas de Projetos   -->
-		<script src="{{asset('build/js/controllers/project-note/ProjectNoteList.js')}}"></script>
+
 		<script src="{{asset('build/js/controllers/project-note/projectNoteNew.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-note/projectNoteList.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-note/projectNoteEdit.js')}}"></script>
-		<script src="{{asset('build/js/controllers/project-note/projectNoteShow.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-note/projectNoteRemove.js')}}"></script>
 
-
-		<!--    Controllers das Arquivos de Projetos -->
 
 		<script src="{{asset('build/js/controllers/project-file/projectFileNew.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-file/projectFileList.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-file/projectFileEdit.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-file/projectFileRemove.js')}}"></script>
 
+		<script src="{{asset('build/js/controllers/project-task/projectTaskList.js')}}"></script>
 
 
 
@@ -153,6 +152,7 @@
 		<script src="{{asset('build/js/services/project.js')}}"></script>
 		<script src="{{asset('build/js/services/projectNote.js')}}"></script>
 		<script src="{{asset('build/js/services/projectFile.js')}}"></script>
+		<script src="{{asset('build/js/services/projectTask.js')}}"></script>
 
 
 

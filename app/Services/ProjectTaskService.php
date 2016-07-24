@@ -7,6 +7,7 @@
  */
 
 namespace codeproject\Services;
+use codeproject\Repositories\ProjectRepository;
 use codeproject\Repositories\ProjectTaskRepository;
 use codeproject\Validators\ProjectTaskValidator;
 use Exception;
@@ -27,26 +28,41 @@ class ProjectTaskService
      */
     private $repository;
 
-    public function __construct(ProjectTaskValidator $validator , ProjectTaskRepository $repository)
+    /**
+     * @var ProjectRepository
+     */
+    private $projectRepository;
+
+    /**
+     * ProjectTaskService constructor.
+     * @param ProjectTaskValidator $validator
+     * @param ProjectRepository $projectRepository
+     * @param ProjectTaskRepository $repository
+     */
+    public function __construct(ProjectTaskValidator $validator , ProjectRepository $projectRepository, ProjectTaskRepository $repository)
     {
 
 
         $this->validator = $validator;
         $this->repository = $repository;
+        $this->projectRepository = $projectRepository;
     }
 
 
-
-
-
-
-
+    /**
+     * @param array $data
+     * @return array|mixed
+     */
     public function create(array $data){
 
         try{
 
             $this->validator->with($data)->passesOrFail();
-            return $this->repository->create($data);
+            $project = $this->projectRepository->skipPresenter()->find($data['project_id']);
+
+            $projectTask = $project->tasks()->create($data);
+
+            return $projectTask;
 
         }catch (ValidatorException $e) {
 
@@ -83,138 +99,18 @@ class ProjectTaskService
 
     }
 
-
-
-
-    public function show($id)
-    {
-
-        try{
-
-            $data =  $this->repository->with(['client' , 'user'])->find($id);
-
-            if(count($data)>0){
-                return $data;
-            }
-            else{
-                return [
-                    'error'=>true,
-                    'message'=>'Este Projeto não Existe'
-                ];
-            }
-
-        }catch (ModelNotFoundException $e) {
-
-            return [
-                'error'=>true,
-                'message'=>'Projeto nao encontrado!'
-            ];
-
-        }catch (QueryException $e){
-
-            return[
-                'error'=>true,
-                'message'=>'Erro'
-            ];
-
-        }catch (Exception $e){
-
-            return[
-                'error'=>true,
-                'message'=>'Ocorreu algum erro ao buscar este projeto'
-            ];
-
-        }
-
-
-
-    }
-
-
-
-    public function index(){
-
-
-        try{
-
-            $data =  $this->repository->with(['client' , 'user'])->all();
-
-            if(count($data)>0){
-                return $data;
-            }
-            else{
-                return [
-                    'error'=>true,
-                    'message'=>'Nao existem projetos cadastrados'
-                ];
-            }
-        }catch (ModelNotFoundException $e) {
-
-            return [
-                'error'=>true,
-                'message'=>'nenhum Projeto nao encontrado!'
-            ];
-
-        }catch (QueryException $e){
-
-            return[
-                'error'=>true,
-                'message'=>'Erro'
-            ];
-
-        }catch (Exception $e){
-
-            return[
-                'error'=>true,
-                'message'=>'Ocorreu algum erro ao buscar os projetos'
-            ];
-
-        }
-
-    }
-
-
+    
 
     public function destroy($id){
 
-        try {
+        $projectTask = $this->repository->skipPresenter()->find($id)
+;
+
+        return $projectTask->delete($id);
 
 
-             $this->repository->delete($id);
+       }
 
-
-            return [
-                'success'=>true,
-                'message'=>'Projeto deletado com sucesso!'
-
-            ];
-
-
-
-        } catch (ModelNotFoundException $e) {
-
-            return [
-                'error'=>true,
-                'message'=>'Projeto nao Existe!.'
-            ];
-
-
-        }catch (QueryException $e) {
-
-            return [
-                'error'=>true,
-                'message'=>'Projeto nao pode ser apagado pois existe um ou mais clientes vinculados a ele.'
-            ];
-
-        }catch (Exception $e) {
-
-            return [
-                'error'=>true,
-                'message'=>'Ocorreu algum erro ao excluir o projeto.'
-            ];
-
-        }
-    }
 
 
 
