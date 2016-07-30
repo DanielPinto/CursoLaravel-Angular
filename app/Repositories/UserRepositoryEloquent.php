@@ -13,6 +13,12 @@ use codeproject\Entities\User;
  */
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
+
+    protected $fieldSearchable = [
+        'name'
+        ];
+
+
     /**
      * Specify Model class name
      *
@@ -31,10 +37,5 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         $this->pushCriteria(app(RequestCriteria::class));
     }
 
-   /*
-    public function presenter()
-    {
-        return ProjectMemberPresenter::class;
-    }
-   */
+
 }

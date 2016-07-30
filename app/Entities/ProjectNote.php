@@ -14,7 +14,6 @@ class ProjectNote extends Model implements Transformable
         'proj_id',
         'title',
         'note',
-
     ];
 
 

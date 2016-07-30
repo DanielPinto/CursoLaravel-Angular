@@ -29,11 +29,10 @@ class ProjectTaskController extends Controller
     }
 
 
-
-
     /**
      * Display a listing of the resource.
      *
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function index($id)
@@ -55,13 +54,15 @@ class ProjectTaskController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request,$id)
     {
         $data = $request->all();
         $data['project_id'] = $id;
+
         return $this->service->create($data);
     }
 

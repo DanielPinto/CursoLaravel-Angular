@@ -8,7 +8,7 @@ angular.module('app.controllers')
             $scope.save = function () {
                 if($scope.form.$valid){
                     $scope.projectTask.status = appConfig.projectTask.status[0].value;
-                    $scope.projectTask.$save({id: $routeParams.id}).then(function () {
+                    $scope.projectTask.$save({id: $routeParams.id }).then(function () {
                         $scope.projectTask = new ProjectTask();
                         $scope.loadTask();
                     });
@@ -17,7 +17,7 @@ angular.module('app.controllers')
 
             $scope.loadTask = function () {
 
-                $scope.projectTask = ProjectTask.query({
+                $scope.projectTasks = ProjectTask.query({
                     id: $routeParams.id,
                     orderBy:'id',
                     sortedBy:'desc'

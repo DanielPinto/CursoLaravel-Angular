@@ -103,11 +103,42 @@ class ProjectTaskService
 
     public function destroy($id){
 
-        $projectTask = $this->repository->skipPresenter()->find($id)
-;
 
-        return $projectTask->delete($id);
+        try {
 
+
+            $projectTask = $this->repository->skipPresenter()->find($id);
+
+            $projectTask->delete($id);
+
+            return [
+                'success'=>true,
+                'message' => 'task deletada com sucesso!'
+            ];
+
+
+        } catch (ModelNotFoundException $e) {
+
+            return [
+                'error' => true,
+                'message' => 'task nao encontrado!'
+            ];
+
+        } catch (QueryException $e) {
+
+            return [
+                'error' => true,
+                'message' => 'Erro'
+            ];
+
+        } catch (Exception $e) {
+
+            return [
+                'error' => true,
+                'message' => 'Ocorreu algum erro ao deletar este task'
+            ];
+
+        }
 
        }
 

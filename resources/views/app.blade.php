@@ -52,7 +52,13 @@
 					<li><a href="{{ url('/#/projects') }}">Projetos</a></li>
 				</ul>
 				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/#/project/1/files') }}">Files</a></li>
+					<li><a href="{{ url('/#/project/11/files') }}">Files</a></li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/#/project/11/notes') }}">Notes</a></li>
+				</ul>
+				<ul class="nav navbar-nav">
+					<li><a href="{{ url('/#/project/11/tasks') }}">Tasks</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -129,6 +135,12 @@
 		<script src="{{asset('build/js/controllers/project-file/projectFileRemove.js')}}"></script>
 
 		<script src="{{asset('build/js/controllers/project-task/projectTaskList.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-task/projectTaskNew.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-task/projectTaskEdit.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-task/projectTaskRemove.js')}}"></script>
+
+		<script src="{{asset('build/js/controllers/project-member/projectMemberList.js')}}"></script>
+		<script src="{{asset('build/js/controllers/project-member/projectMemberRemove.js')}}"></script>
 
 
 
@@ -153,6 +165,7 @@
 		<script src="{{asset('build/js/services/projectNote.js')}}"></script>
 		<script src="{{asset('build/js/services/projectFile.js')}}"></script>
 		<script src="{{asset('build/js/services/projectTask.js')}}"></script>
+		<script src="{{asset('build/js/services/projectMember.js')}}"></script>
 
 
 

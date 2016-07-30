@@ -9,23 +9,34 @@
 namespace codeproject\Transformers;
 
 
+use codeproject\Entities\ProjectMember;
 use codeproject\Entities\User;
 use League\Fractal\TransformerAbstract;
 
 class ProjectMemberTransformer extends TransformerAbstract
 {
 
-    public function transform(User $user)
+    protected $defaultIncludes = [
+
+        'user'
+    ];
+
+    public function transform(ProjectMemberTransformer $member)
     {
         return [
 
-            'member_id'=>$user->id,
-            'name'=>$user->name,
-            'email'=>$user->email,
-            'password'=>$user->password,
+            'id'=>$member->project_id,
+            'member_id'=>$member->id,
 
         ];
     }
+
+
+    public function includeUser(ProjectMember $member)
+    {
+        return $this->item($member->members, new MemberTransformer());
+    }
+
 
 
 }

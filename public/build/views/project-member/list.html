@@ -5,7 +5,7 @@
 
 
                 <div class="panel-heading">
-                    Listagem de Tasks de Projeto
+                    Listagem de Membros de Projeto
 
                     <div class="pull-right col-md-10 ">
 
@@ -16,7 +16,15 @@
                                 <label class="col-md-2 control-label">Name</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="name" ng-model="projectTask.name" required>
+
+                                    <input type="text" class="form-control" name="member_id"
+                                           ng-model="userSelected"
+                                           typeahead="o as o.name for o in getUsers($viewValue)|limitTo:10"
+                                           typeahead-input-formatter="formatName($model)"
+                                           typeahead-on-select="selectUser($item)"
+                                           typeahead-editable="false"
+                                           required />
+
                                 </div>
 
 
@@ -48,25 +56,14 @@
                         <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Start Date</th>
-                            <th>Due Date</th>
-                            <th>Status</th>
                             <th>Acao: </th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="o in projectTasks">
-                            <td>{{o.name}}</td>
-                            <td>{{o.start_date | dateBr}}...</td>
-                            <td>{{o.due_date | dateBr}}...</td>
-                            <td>{{o.status | dateBr}}...</td>
+                        <tr ng-repeat="o in projectMembers">
+                            <td>{{o.member.name}}</td>
                             <td>
-                                <a ng-href="#/project/{{o.project_id}}/task/{{o.id}}/edit">
-                                    Editar
-                                </a> |
-                            </td>
-                            <td>
-                                <a ng-href="#/project/{{o.project_id}}/task/{{o.id}}/remove">
+                                <a ng-href="#/project/{{o.project_id}}/member/{{o.id}}/remove">
                                     Excluir
                                 </a>
                             </td>
