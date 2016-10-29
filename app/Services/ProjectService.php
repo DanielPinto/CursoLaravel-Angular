@@ -125,8 +125,7 @@ class ProjectService
 
         try {
 
-            //$data =
-                return $this->repository->with(['client', 'user'])->find($id);
+            $data = $this->repository->with(['client', 'user'])->find($id);
 
             if (count($data) > 0) {
                 return $data;
@@ -411,30 +410,27 @@ class ProjectService
 
 
 
-    public function checkProjectOwner($projectFileId){
+    public function checkProjectOwner($projectId){
 
         $userId = \Authorizer::getResourceOwnerId();
 
-        $projectId = $this->repository->skipPresenter()->find($projectFileId)->project_id;
 
         return $this->repository->isOwner($projectId,$userId);
     }
 
 
 
-    public function checkProjectMember($projectFileId){
+    public function checkProjectMember($projectId){
 
         $userId = \Authorizer::getResourceOwnerId();
-
-        $projectId = $this->repository->skipPresenter()->find($projectFileId)->project_id;
 
         return $this->repository->hasMember($projectId,$userId);
     }
 
 
-    public function checkProjectPermission($projectFileId){
+    public function checkProjectPermission($projectId){
 
-        if ($this->checkProjectOwner($projectFileId)or $this->checkProjectMember($projectFileId)) {
+        if ($this->checkProjectOwner($projectId)or $this->checkProjectMember($projectId)) {
             return true;
         }
 

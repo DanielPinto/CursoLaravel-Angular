@@ -29,21 +29,40 @@ return [
 
     'grant_types' => [
 
+        /*
 
-            'password' => [
-                'class' => '\League\OAuth2\Server\Grant\PasswordGrant',
-                'callback' => '\codeproject\OAuth\Verifier@verify',
-                'access_token_ttl' => 3600
-            ]
+        'password' => [
+            'class' => '\League\OAuth2\Server\Grant\PasswordGrant',
+            'callback' => function($username,$password){
+                if(Auth::validate(['email'=>$username,'password'=>$password])){
 
-     /*
-        'refresh_token'=>[
+                    $user = \codeproject\Entities\User::where('email',$username)->first();
 
-            'class'=> '\League\OAuth2\Server\Grant\RefreshTokenGrant',
-            'access-token_ttl' => 3600,
+                    return $user->id;
+                }
+
+                return false;
+            },
+            'access_token_ttl' => 3600
+
+        ],
+
+        */
+
+        'password' => [
+            'class' => '\League\OAuth2\Server\Grant\PasswordGrant',
+            'callback' => '\codeproject\OAuth\Verifier@verify',
+            'access_token_ttl' => 3600
+
+        ],
+
+
+        'refresh_token' => [
+            'class' => '\League\OAuth2\Server\Grant\RefreshTokenGrant',
+            'access_token_ttl' => 3600,
             'refresh_token_ttl' => 36000
         ]
-     */
+
 
     ],
 

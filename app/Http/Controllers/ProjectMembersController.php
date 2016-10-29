@@ -4,7 +4,6 @@ namespace codeproject\Http\Controllers;
 
 use codeproject\Repositories\ProjectMemberRepository;
 use codeproject\Services\ProjectMemberService;
-use codeproject\Services\ProjectService;
 use Illuminate\Http\Request;
 
 use codeproject\Http\Requests;
@@ -22,9 +21,11 @@ class ProjectMembersController extends Controller
     private $service;
 
 
+
     /**
      * @param ProjectMemberRepository $repository
      * @param ProjectMemberService $service
+     * @param PojectService $projectService
      */
     public function __construct(ProjectMemberRepository $repository , ProjectMemberService $service)
     {
@@ -34,8 +35,9 @@ class ProjectMembersController extends Controller
         $this->service = $service;
 
 
-        //$this->middleware('check.project.owner',['except'=>['index','show']]);
-        //$this->middleware('check.project.permission',['except'=>['store','destroy']]);
+        $this->middleware('check.project.owner',['except'=>['index','show']]);
+        $this->middleware('check.project.permission',['except'=>['store','destroy']]);
+
     }
 
 

@@ -53,29 +53,22 @@ class ProjectTaskService
      * @param array $data
      * @return array|mixed
      */
-    public function create(array $data){
 
+
+    public function create(array $data)
+    {
         try{
-
             $this->validator->with($data)->passesOrFail();
             $project = $this->projectRepository->skipPresenter()->find($data['project_id']);
-
             $projectTask = $project->tasks()->create($data);
-
             return $projectTask;
-
-        }catch (ValidatorException $e) {
-
+        }
+        catch(ValidatorException $e){
             return [
                 'error' => true,
                 'message' => $e->getMessageBag()
             ];
-
         }
-
-
-
-
     }
 
 

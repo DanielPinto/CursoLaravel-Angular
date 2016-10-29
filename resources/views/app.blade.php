@@ -62,21 +62,25 @@
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
+
+
 					@if(auth()->guest())
-						@if(!Request::is('auth/login'))
+						@if(!Request::is('/login'))
 							<li><a href="{{ url('/#/login') }}">Login</a></li>
 						@endif
-						@if(!Request::is('auth/register'))
+						@if(!Request::is('/register'))
 							<li><a href="{{ url('/#/register') }}">Register</a></li>
 						@endif
 					@else
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="{{ url('/auth/logout') }}">Logout</a></li>
+								<li><a href="{{ url('/#/logout') }}">Logout</a></li>
 							</ul>
 						</li>
 					@endif
+
+
 				</ul>
 			</div>
 		</div>
@@ -104,11 +108,13 @@
 		<script src="{{asset('build/js/vendor/query-string.js')}}"></script>
 		<script src="{{asset('build/js/vendor/angular-oauth2.min.js')}}"></script>
 		<script src="{{asset('build/js/vendor/ng-file-upload.min.js')}}"></script>
-		
+		<script src="{{asset('build/js/vendor/http-auth-interceptor.js')}}"></script>
+
 
 		<script src="{{asset('build/js/app.js')}}"></script>
 
 		<script src="{{asset('build/js/controllers/login.js')}}"></script>
+		<script src="{{asset('build/js/controllers/loginModal.js')}}"></script>
 		<script src="{{asset('build/js/controllers/home.js')}}"></script>
 
 
@@ -160,6 +166,7 @@
 
 		<!--	SERVICES   -->
 		<script src="{{asset('build/js/services/url.js')}}"></script>
+		<script src="{{asset('build/js/services/oauthFixInterceptor.js')}}"></script>
 		<script src="{{asset('build/js/services/client.js')}}"></script>
 		<script src="{{asset('build/js/services/project.js')}}"></script>
 		<script src="{{asset('build/js/services/projectNote.js')}}"></script>
@@ -174,6 +181,7 @@
 
 
 		<script src="{{asset('build/js/directives/projectFileDownload.js')}}"></script>
+		<script src="{{asset('build/js/directives/loginForm.js')}}"></script>
 
 
 
