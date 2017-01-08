@@ -1,8 +1,9 @@
 var app = angular.module('app', [
     'angular-oauth2', 'ngRoute', 'app.controllers', 'app.services','app.filters','app.directives',
     'ui.bootstrap.typeahead','ui.bootstrap.datepicker','ui.bootstrap.tpls', 'ui.bootstrap.modal',
-    'ngFileUpload','http-auth-interceptor'
-]);
+    'ngFileUpload','http-auth-interceptor','angularUtils.directives.dirPagination',
+    'mgcrea.ngStrap.navbar', 'ui.bootstrap.dropdown'
+  ]);
 
 //'ui-bootstrap-modal',
 
@@ -43,7 +44,7 @@ app.provider('appConfig',['$httpParamSerializerProvider',function ($httpParamSer
                 var headersGetter = headers();
                 if(headersGetter['content-type'] == 'application/json' || headersGetter['content-type'] == 'text/json') {
                     var dataJson = JSON.parse(data);
-                    if(dataJson.hasOwnProperty('data')) {
+                    if(dataJson.hasOwnProperty('data') && Object.keys(dataJson).length == 1 ) {
                         dataJson = dataJson.data;
                     }
                     return dataJson;
@@ -80,7 +81,7 @@ app.config(['$routeProvider', '$httpProvider', 'OAuthProvider',
 
        // $httpProvider.defaults.transformRequest = appConfigProvider.config.utils.transformRequest;
         // $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
-        
+
         $httpProvider.interceptors.splice(0,1);
         $httpProvider.interceptors.splice(0,1);
         $httpProvider.interceptors.push('oauthFixInterceptor');
@@ -258,7 +259,7 @@ app.run(['$rootScope', '$location','$http','$modal','httpBuffer','OAuth', functi
                     templateUrl: 'build/views/templates/loginModal.html',
                     controller: 'LoginModalController'
                 });
-                
+
                 $rootScope.loginModalOpened = true;
                 return;
 
@@ -280,7 +281,7 @@ app.run(['$rootScope', '$location','$http','$modal','httpBuffer','OAuth', functi
                     return data.deferred.resolve(response);
                 });
             }
-       
+
             */
 
 
@@ -294,4 +295,3 @@ app.run(['$rootScope', '$location','$http','$modal','httpBuffer','OAuth', functi
         return $location.path('login');
     });
 }]);
-

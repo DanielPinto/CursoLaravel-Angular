@@ -16,9 +16,16 @@ angular.module('app.services')
                             return trans;
                         }
                    },
+
+                   query:{
+                     isArray : false
+                   },
+
+
                     update: {
-                    method: 'PUT'
-                }
+                      method: 'PUT'
+
+                    },
 
 
                     /* subscreve o metodo save para formatar a data antes de enviar apara a API
@@ -42,4 +49,3 @@ angular.module('app.services')
 
             });
     }]);
-

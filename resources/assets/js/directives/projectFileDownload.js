@@ -3,7 +3,7 @@ angular.module('app.directives')
     ['$timeout','appConfig','ProjectFile',function($timeout,appConfig,ProjectFile){
 
        return {
-           
+
                 restrict: 'E',
                 templateUrl: appConfig.baseUrl + '/build/views/templates/projectFileDownload.html',
                 link: function(scope,element,attr){

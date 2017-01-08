@@ -35,56 +35,9 @@
 	<![endif]-->
 </head>
 <body>
-	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
-					<span class="sr-only">Toggle Navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">Laravel</a>
-			</div>
-
-			<div class="collapse navbar-collapse" id="navbar">
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/#/projects') }}">Projetos</a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/#/project/11/files') }}">Files</a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/#/project/11/notes') }}">Notes</a></li>
-				</ul>
-				<ul class="nav navbar-nav">
-					<li><a href="{{ url('/#/project/11/tasks') }}">Tasks</a></li>
-				</ul>
-
-				<ul class="nav navbar-nav navbar-right">
 
 
-					@if(auth()->guest())
-						@if(!Request::is('/login'))
-							<li><a href="{{ url('/#/login') }}">Login</a></li>
-						@endif
-						@if(!Request::is('/register'))
-							<li><a href="{{ url('/#/register') }}">Register</a></li>
-						@endif
-					@else
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ auth()->user()->name }} <span class="caret"></span></a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="{{ url('/#/logout') }}">Logout</a></li>
-							</ul>
-						</li>
-					@endif
-
-
-				</ul>
-			</div>
-		</div>
-	</nav>
+	<load-template url="build/views/templates/menu.html"></load-template>
 
 	<div ng-view></div>
 
@@ -109,6 +62,7 @@
 		<script src="{{asset('build/js/vendor/angular-oauth2.min.js')}}"></script>
 		<script src="{{asset('build/js/vendor/ng-file-upload.min.js')}}"></script>
 		<script src="{{asset('build/js/vendor/http-auth-interceptor.js')}}"></script>
+		<script src="{{asset('build/js/vendor/dirPagination.js')}}"></script>
 
 
 		<script src="{{asset('build/js/app.js')}}"></script>
@@ -159,7 +113,7 @@
 
 		<!-- FILTERS-->
 		<script src="{{asset('build/js/filters/date-br.js')}}"></script>
-                
+
 
 
 
@@ -182,6 +136,7 @@
 
 		<script src="{{asset('build/js/directives/projectFileDownload.js')}}"></script>
 		<script src="{{asset('build/js/directives/loginForm.js')}}"></script>
+		<script src="{{asset('build/js/directives/loadTemplate.js')}}"></script>
 
 
 

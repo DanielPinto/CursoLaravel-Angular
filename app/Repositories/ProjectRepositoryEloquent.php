@@ -33,21 +33,35 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
     }
 
 
-    
-    
-    
+
+
+
     public function isOwner($projectId , $userId){
-    
+
     	if(count($this->skipPresenter()->findWhere(['id'=>$projectId , 'user_id'=>$userId]))){
-    
+
     		return true;
-    
+
     	}
-    
+
     	return false;
-    
+
     }
 
+
+    public function findOwner($userId , $limit = null , $columns = array() ){
+
+        return $this->scopeQuery(function ($query) use ($userId){
+
+               return $query->select('projects.*')->where('user_id','=',$userId);
+
+           })->paginate($limit,$columns);
+
+
+    }
+
+
+/*
 
    public function findProjectWithOwnerAndMember($userId){
 
@@ -60,11 +74,13 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
            })->all();
    }
 
-    
+   */
+
+
     public function hasMember($projectId , $memberId){
-    
+
     	$project = $this->skipPresenter()->find($projectId);
-    
+
     	foreach($project->members as $member)
     	{
     		if($member->id == $memberId)
@@ -72,11 +88,11 @@ class ProjectRepositoryEloquent extends BaseRepository implements ProjectReposit
     			return true;
     		}
     	}
-    
+
     	return false;
     }
-    
-    
+
+
  /*
 
     public function presenter()
