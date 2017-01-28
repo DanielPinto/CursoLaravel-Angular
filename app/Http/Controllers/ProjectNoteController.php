@@ -1,5 +1,5 @@
 <?php
-
+//trocado no index
 namespace codeproject\Http\Controllers;
 
 use codeproject\Repositories\ProjectNoteRepository;
@@ -36,7 +36,7 @@ class ProjectNoteController extends Controller
      */
     public function index($id)
     {
-        return $this->repository->findWhere(['proj_id'=>$id]);
+        return $this->repository->findWhere(['project_id'=>$id]); // TROCADO
     }
 
     /**

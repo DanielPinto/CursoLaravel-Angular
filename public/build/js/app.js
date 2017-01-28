@@ -67,7 +67,6 @@ app.config(['$routeProvider', '$httpProvider', 'OAuthProvider',
     function ($routeProvider, $httpProvider, OAuthProvider,
               OAuthTokenProvider, appConfigProvider) {
 
-
         /*
 
         $httpProvider.defaults.headers.post['Content-Type']=
@@ -79,8 +78,8 @@ app.config(['$routeProvider', '$httpProvider', 'OAuthProvider',
 
          */
 
-       // $httpProvider.defaults.transformRequest = appConfigProvider.config.utils.transformRequest;
-        // $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
+        $httpProvider.defaults.transformRequest = appConfigProvider.config.utils.transformRequest;
+        $httpProvider.defaults.transformResponse = appConfigProvider.config.utils.transformResponse;
 
         $httpProvider.interceptors.splice(0,1);
         $httpProvider.interceptors.splice(0,1);
@@ -101,44 +100,68 @@ app.config(['$routeProvider', '$httpProvider', 'OAuthProvider',
                     }]
                 }
             })
+            .when('/', {
+                templateUrl: 'build/views/home.html',
+                controller: 'HomeController',
+                title: 'Home'
+            })
             .when('/home', {
                 templateUrl: 'build/views/home.html',
-                controller: 'HomeController'
+                controller: 'HomeController',
+                title: 'Home'
+            })
+            .when('/clients/dashboard', {
+                templateUrl: 'build/views/client/dashboard.html',
+                controller: 'ClientDashboardController',
+                title: 'Clients Dashboard'
             })
             .when('/clients', {
                 templateUrl: 'build/views/client/list.html',
-                controller: 'ClientListController'
+                controller: 'ClientListController',
+                title: 'Clients'
             })
             .when('/clients/new', {
                 templateUrl: 'build/views/client/new.html',
-                controller: 'ClientNewController'
+                controller: 'ClientNewController',
+                title: 'Clients'
             })
             .when('/clients/:id/edit', {
                 templateUrl: 'build/views/client/edit.html',
-                controller: 'ClientEditController'
+                controller: 'ClientEditController',
+                title: 'Clients'
             })
             .when('/clients/:id/remove', {
                 templateUrl: 'build/views/client/remove.html',
-                controller: 'ClientRemoveController'
+                controller: 'ClientRemoveController',
+                title: 'Clients'
             })
 
             /*  rotas de project note*/
 
+            .when('/projects/dashboard', {
+                templateUrl: 'build/views/project/dashboard.html',
+                controller: 'ProjectDashboardController',
+                title: 'Projects Dashboard'
+            })
             .when('/projects', {
                 templateUrl: 'build/views/project/list.html',
-                controller: 'ProjectListController'
+                controller: 'ProjectListController',
+                title: 'Projects'
             })
             .when('/project/new', {
                 templateUrl: 'build/views/project/new.html',
-                controller: 'ProjectNewController'
+                controller: 'ProjectNewController',
+                title: 'Projects'
             })
             .when('/project/:id/edit', {
                 templateUrl: 'build/views/project/edit.html',
-                controller: 'ProjectEditController'
+                controller: 'ProjectEditController',
+                title: 'Projects'
             })
             .when('/project/:id/remove', {
                 templateUrl: 'build/views/project/remove.html',
-                controller: 'ProjectRemoveController'
+                controller: 'ProjectRemoveController',
+                title: 'Projects'
             })
             /*  rotas de project note*/
             .when('/project/:id/notes', {
@@ -202,6 +225,11 @@ app.config(['$routeProvider', '$httpProvider', 'OAuthProvider',
             templateUrl: 'build/views/project-member/list.html',
             controller: 'ProjectMemberListController'
             })
+            .when('/projects-member/dashboard', {
+                templateUrl: 'build/views/project-member/dashboard.html',
+                controller: 'ProjectsMemberDashboardController',
+                title: 'Sou Membro'
+            })
             .when('/project/:id/member/:idProjectMember/remove', {
                 templateUrl: 'build/views/project-member/remove.html',
                 controller: 'ProjectMemberRemoveController'
@@ -237,6 +265,11 @@ app.run(['$rootScope', '$location','$http','$modal','httpBuffer','OAuth', functi
 
 
 
+    });
+
+    $rootScope.$on('$routeChangeSuccess', function(event, current, previous){
+
+      $rootScope.pageTitle = current.$$route.title;
     });
 
     $rootScope.$on('oauth:error', function (event, data) {

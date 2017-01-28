@@ -14,7 +14,7 @@ use League\Fractal\TransformerAbstract;
 class ProjectTransformer extends TransformerAbstract
 {
 
-   protected $defaultIncludes=['members'];
+    protected $defaultIncludes = ['members','notes','tasks','files','clients'];
 
 
     public function transform(Project $project)
@@ -29,6 +29,9 @@ class ProjectTransformer extends TransformerAbstract
             'progress'=>$project->progress,
             'status'=>$project->status,
             'due_date'=>$project->due_date,
+            'is_member'=>$project->user_id != \Authorizer::getResourceOwnerId(),
+            'tasks_count' => $project->tasks->count(),
+            'tasks_opened' => $this->countTasksOpened($project)
 
         ];
     }
@@ -40,5 +43,44 @@ class ProjectTransformer extends TransformerAbstract
     {
         return $this->collection($project->members, new MemberTransformer());
     }
+
+
+
+    public function includeNotes(Project $project)
+    {
+       return $this->collection($project->note, new ProjectNoteTransformer());
+     }
+
+
+   public function includeTasks(Project $project)
+   {
+       return $this->collection($project->tasks, new ProjectTaskTransformer());
+   }
+
+
+   public function includeFiles(Project $project)
+   {
+       return $this->collection($project->files, new ProjectFilesTransformer());
+   }
+
+
+    public function includeClients(Project $project)
+    {
+            if($project->client) {
+                return $this->item($project->client, new ClientTransformer());
+            }
+            return null;
+    }
+
+
+    public function countTasksOpened(Project $project){
+       $count = 0;
+       foreach($project->tasks as $o){
+           if($o->status == 1){
+               $count++;
+           }
+       }
+       return $count;
+   }
 
 }

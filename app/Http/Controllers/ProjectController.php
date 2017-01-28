@@ -25,8 +25,8 @@ class ProjectController extends Controller
 
         $this->repository = $repository;
         $this->service = $service;
-        $this->middleware('check.project.owner',['except'=>['store','show','index']]);
-        $this->middleware('check.project.permission',['except'=>['show','index','store','update','destroy']]);
+        $this->middleware('check.project.owner',['except'=>['store','show','index','projectsMember']]);
+        $this->middleware('check.project.permission',['except'=>['show','index','store','update','destroy','projectsMember']]);
     }
 
 
@@ -35,11 +35,53 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
-        return $this->repository->findOwner(\Authorizer::getResourceOwnerId(),4);
+      try{
+
+        return $this->repository->findOwner(\Authorizer::getResourceOwnerId(), $request->query->get('limit'));
+
+      }  catch (NoActiveAccessTokenException $error) {
+
+        return [
+          'error' => true,
+          'message' => 'not login!',
+        ];
+
+      } catch (\Exception $error) {
+
+        return [
+          'error' => true,
+          'message' => 'error in system!'
+        ];
+      }
+
+
     }
+
+
+
+     public function projectsMember(Request $request)
+    {
+        try {
+            return $this->repository->findMember(\Authorizer::getResourceOwnerId(), $request->query->get('limit'));
+        } catch (NoActiveAccessTokenException $error) {
+
+          return [
+            'error' => true,
+            'message' => 'not login!',
+          ];
+
+        } catch (\Exception $error) {
+
+          return [
+            'error' => true,
+            'message' => 'error in system!'
+          ];
+        }
+    }
+
 
     /**
      * Show the form for creating a new resource.

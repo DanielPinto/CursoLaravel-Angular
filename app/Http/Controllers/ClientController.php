@@ -36,9 +36,10 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return $this->service->index();
+        $limit = $request->query->get('limit', 15);
+        return $this->repository->paginate($limit);
     }
 
     /**

@@ -1,0 +1,8 @@
+/vendor
+/node_modules
+/scafold-master
+Homestead.yaml
+Homestead.json
+.env
+resources/bower_components
+/nbproject/private/

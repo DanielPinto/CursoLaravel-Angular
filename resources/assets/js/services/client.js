@@ -8,6 +8,9 @@ angular.module('app.services')
            {
                update:{
                    method:'put'
+               },
+               query: {
+                 isArray: false
                }
            }
        );

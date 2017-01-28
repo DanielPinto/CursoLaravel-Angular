@@ -1,4 +1,5 @@
 <?php
+//trocado
 /**
  * Created by PhpStorm.
  * User: w8
@@ -20,7 +21,7 @@ class ProjectNoteTransformer extends TransformerAbstract
         return [
 
             'id'=>$note->id,
-            'project_id'=>$note->proj_id,
+            'project_id'=>$note->project_id,
             'title'=>$note->title,
             'note'=>$note->note,
 

@@ -26,6 +26,10 @@ angular.module('app.services')
                       method: 'PUT'
 
                     },
+                    projectsMember: {
+                      url: appConfig.baseUrl + '/projects-member',
+                      method: 'GET'
+                    }
 
 
                     /* subscreve o metodo save para formatar a data antes de enviar apara a API

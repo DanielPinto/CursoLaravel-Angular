@@ -15,20 +15,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr dir-paginate="o in projects | itemsPerPage: projectsPerPage" 
+                        <tr dir-paginate="o in projects | itemsPerPage: projectsPerPage"
                         total-items="totalProjects" current-page="pagination.current">
                             <td>{{o.name}}</td>
-                            <td>{{o.client.nome}}</td>
+                            <td>{{o.clients.data.nome}}</td>
                             <td>{{o.progress}}</td>
                             <td>{{o.status}}</td>
                             <td>{{o.due_date | dateBr}}</td>
                             <td>
-                                <a ng-href="#/project/{{o.id}}/members">Membros</a>
-                                <a ng-href="#/project/{{o.id}}/tasks">Tarefas</a>
-                                <a ng-href="#/project/{{o.id}}/notes">Notas</a>
-                                <a ng-href="#/project/{{o.id}}/files">Arquivos</a>
-                                <a ng-href="#/project/{{o.id}}/edit">Editar</a>
-                                <a ng-href="#/project/{{o.id}}/remove">Excluir</a>
+                                <a ng-href="#/project/{{o.project_id}}/members">Membros</a>
+                                <a ng-href="#/project/{{o.project_id}}/tasks">Tarefas</a>
+                                <a ng-href="#/project/{{o.project_id}}/notes">Notas</a>
+                                <a ng-href="#/project/{{o.project_id}}/files">Arquivos</a>
+                                <a ng-href="#/project/{{o.project_id}}/edit">Editar</a>
+                                <a ng-href="#/project/{{o.project_id}}/remove">Excluir</a>
                             </td>
                         </tr>
                         </tbody>

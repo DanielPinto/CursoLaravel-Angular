@@ -10,10 +10,10 @@
 
 	@if(Config::get('app.debug'))
 
-		<link href="{{asset('build/css/app.css')}}" rel="stylesheet"/>
-		<link href="{{asset('build/css/components.css')}}" rel="stylesheet"/>
-		<link href="{{asset('build/css/flaticon.css')}}" rel="stylesheet"/>
 		<link href="{{asset('build/css/font-awesome.css')}}" rel="stylesheet"/>
+		<link href="{{asset('build/css/flaticon.css')}}" rel="stylesheet"/>
+		<link href="{{asset('build/css/components.css')}}" rel="stylesheet"/>
+		<link href="{{asset('build/css/app.css')}}" rel="stylesheet"/>
 
 	@else
 
@@ -67,6 +67,7 @@
 
 		<script src="{{asset('build/js/app.js')}}"></script>
 
+		<script src="{{asset('build/js/controllers/menu.js')}}"></script>
 		<script src="{{asset('build/js/controllers/login.js')}}"></script>
 		<script src="{{asset('build/js/controllers/loginModal.js')}}"></script>
 		<script src="{{asset('build/js/controllers/home.js')}}"></script>
@@ -75,6 +76,7 @@
 		<script src="{{asset('build/js/services/user.js')}}"></script>
 
 		<!--    Controllers dos Clients   -->
+		<script src="{{asset('build/js/controllers/client/clientDashboard.js')}}"></script>
 		<script src="{{asset('build/js/controllers/client/clientList.js')}}"></script>
 		<script src="{{asset('build/js/controllers/client/clientNew.js')}}"></script>
 		<script src="{{asset('build/js/controllers/client/clientEdit.js')}}"></script>
@@ -82,7 +84,6 @@
 
 
 		<!--    Controllers das Notas de Projetos   -->
-
 		<script src="{{asset('build/js/controllers/project-note/projectNoteNew.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-note/projectNoteList.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project-note/projectNoteEdit.js')}}"></script>
@@ -104,11 +105,15 @@
 
 
 
+
 		<!--    Controllers de Projetos   -->
+
+		<script src="{{asset('build/js/controllers/project/projectDashboard.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project/ProjectList.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project/projectNew.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project/projectEdit.js')}}"></script>
 		<script src="{{asset('build/js/controllers/project/projectRemove.js')}}"></script>
+			<script src="{{asset('build/js/controllers/project/projectsMemberDashboard.js')}}"></script>
 
 
 		<!-- FILTERS-->
@@ -137,6 +142,8 @@
 		<script src="{{asset('build/js/directives/projectFileDownload.js')}}"></script>
 		<script src="{{asset('build/js/directives/loginForm.js')}}"></script>
 		<script src="{{asset('build/js/directives/loadTemplate.js')}}"></script>
+		<script src="{{asset('build/js/directives/menuActivated.js')}}"></script>
+		<script src="{{asset('build/js/directives/tabProject.js')}}"></script>
 
 
 

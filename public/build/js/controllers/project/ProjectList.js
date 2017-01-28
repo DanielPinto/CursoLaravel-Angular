@@ -3,9 +3,10 @@ angular.module('app.controllers')
         '$scope','$routeParams','Project',function($scope,$routeParams,Project){
 
 
+
     $scope.projects = [];
     $scope.totalProjects = 0;
-    $scope.projectsPerPage = 4; // this should match however many results your API puts on one page
+    $scope.projectsPerPage = 5;
 
 
     $scope.pagination = {
@@ -24,7 +25,7 @@ angular.module('app.controllers')
       },function(data){
 
             $scope.projects = data.data;
-            $scope.totalProjects = data.total;
+            $scope.totalProjects = data.meta.pagination.total;
 
           });
 
@@ -34,15 +35,3 @@ angular.module('app.controllers')
     	getResultsPage(1);
 
     }]);
-
-
-
-    /*
-// this is just an example, in reality this stuff should be in a service
-        	$http.get('path/to/api/users?page=' + pageNumber)
-           		.then(function(result) {
-                	$scope.users = result.data.Items;
-                	$scope.totalUsers = result.data.Count
-            	});
-
-    */

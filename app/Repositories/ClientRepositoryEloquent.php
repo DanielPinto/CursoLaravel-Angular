@@ -5,6 +5,7 @@ namespace codeproject\Repositories;
 use codeproject\Entities\Client;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
+use codeproject\Presenters\ClientPresenter;
 
 /**
  * Class ClientRepositoryEloquent
@@ -28,8 +29,8 @@ class ClientRepositoryEloquent extends BaseRepository implements ClientRepositor
         return Client::class;
     }
 
-    /**
-     * Boot up the repository, pushing criteria
+    /*
+      Boot up the repository, pushing criteria
 
     public function boot()
     {
@@ -45,10 +46,10 @@ class ClientRepositoryEloquent extends BaseRepository implements ClientRepositor
 
    }
 
-    /*
+
      public function presenter()
      {
          return ClientPresenter::class;
      }
-  */
+
 }
