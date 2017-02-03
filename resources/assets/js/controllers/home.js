@@ -1,9 +1,9 @@
 angular.module('app.controllers')
-    .controller('HomeController', ['$scope','$cookies', /*'$timeout', '$pusher',*/'$filter','appConfig','Project',
-        function ($scope,$cookies,/*$timeout, $pusher,*/$filter,appConfig,Project) {
+    .controller('HomeController', ['$scope','$cookies','$timeout','$pusher','$filter','appConfig','Project',
+        function ($scope,$cookies,$timeout,$pusher,$filter,appConfig,Project) {
 
             $scope.projects = [];
-            //$scope.notifications = [];
+            $scope.notifications = [];
             $scope.status = appConfig.project.status;
 
             $scope.getStatus = function($id) {
@@ -22,9 +22,9 @@ angular.module('app.controllers')
                 $scope.projects = response.data;
             });
 
-            
 
-  /*
+
+            window.client = new Pusher(appConfig.pusherKey);
             var pusher = $pusher(window.client);
             var channel = pusher.subscribe('user.' + $cookies.getObject('user').id);
             channel.bind('CodeProject\\Events\\TaskWasIncluded',
@@ -61,6 +61,6 @@ angular.module('app.controllers')
             };
 
 
-*/
+
 
         }]);

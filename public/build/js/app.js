@@ -2,7 +2,7 @@ var app = angular.module('app', [
     'angular-oauth2', 'ngRoute', 'app.controllers', 'app.services','app.filters','app.directives',
     'ui.bootstrap.typeahead','ui.bootstrap.datepicker','ui.bootstrap.tpls', 'ui.bootstrap.modal',
     'ngFileUpload','http-auth-interceptor','angularUtils.directives.dirPagination',
-    'mgcrea.ngStrap.navbar', 'ui.bootstrap.dropdown'
+    'mgcrea.ngStrap.navbar', 'ui.bootstrap.dropdown','pusher-angular','ui-notification'
   ]);
 
 //'ui-bootstrap-modal',
@@ -15,6 +15,7 @@ angular.module('app.services', ['ngResource']);
 app.provider('appConfig',['$httpParamSerializerProvider',function ($httpParamSerializerProvider) {
     var config = {
         baseUrl: 'http://localhost:8000',
+        pusherKey:'6d1ac04a0c9ace1add9d',
         project:{
             status:[
                 {value: 1, label:'Não Iniciado'},
@@ -252,8 +253,44 @@ app.config(['$routeProvider', '$httpProvider', 'OAuthProvider',
 
     }]);
 
-app.run(['$rootScope', '$location','$http','$modal','httpBuffer','OAuth', function (
-    $rootScope, $location , $http ,$modal, httpBuffer ,OAuth) {
+app.run(['$rootScope', '$location','$http','$modal','$cookies','$pusher','httpBuffer','OAuth','appConfig','Notification', function (
+    $rootScope, $location , $http ,$modal,$cookies,$pusher,httpBuffer ,OAuth,appConfig,Notification) {
+
+    $rootScope.$on('pusher-build', function(event , data){
+      if(data.next.$$route.originalPath != '/login'){
+        if(OAuth.isAuthenticated()){
+          if(!window.client){
+
+              window.client = new Pusher(appConfig.pusherKey);
+              var pusher = $pusher(window.client);
+              var channel = client.subscribe('user.'+$cookies.getObject('user').id);
+              channel.bind('codeproject\\Events\\TaskWasIncluded',
+              function(data){
+                var name = data.task.name;
+                Notification.success('Tarefa '+name+' foi incluida!');
+              });
+
+          }
+        }
+      }
+
+
+    });
+
+
+    $rootScope.$on('pusher-destroy', function(event , data){
+      if(data.next.$$route.originalPath != '/login'){
+        if(window.client){
+          window.client.disconnect();
+          window.client = null;
+        }
+
+      }
+
+    });
+
+
+
     $rootScope.$on('$routeChangeStart',function (event,next,current) {
 
         if(next.$$route.originalPath != '/login'){
@@ -262,6 +299,8 @@ app.run(['$rootScope', '$location','$http','$modal','httpBuffer','OAuth', functi
                 $location.path('login');
             }
         }
+        $rootScope.$emit('pusher-build',{next:next});
+        $rootScope.$emit('pusher-destroy',{next:next});
 
 
 

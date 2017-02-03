@@ -4,7 +4,7 @@ angular.module('app.controllers')
         $scope,$location,$routeParams,ProjectNote
     ){
         $scope.projectNote = new ProjectNote();
-        $scope.projectNote.proj_id = $routeParams.id;
+        $scope.projectNote.project_id = $routeParams.id;
 
         $scope.save = function(){
 

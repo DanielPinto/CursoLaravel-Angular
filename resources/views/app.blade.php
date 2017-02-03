@@ -14,6 +14,7 @@
 		<link href="{{asset('build/css/flaticon.css')}}" rel="stylesheet"/>
 		<link href="{{asset('build/css/components.css')}}" rel="stylesheet"/>
 		<link href="{{asset('build/css/app.css')}}" rel="stylesheet"/>
+		<link href="{{asset('build/css/vendor/angular-ui-notification.min.css')}}" rel="stylesheet"/>
 
 	@else
 
@@ -63,6 +64,9 @@
 		<script src="{{asset('build/js/vendor/ng-file-upload.min.js')}}"></script>
 		<script src="{{asset('build/js/vendor/http-auth-interceptor.js')}}"></script>
 		<script src="{{asset('build/js/vendor/dirPagination.js')}}"></script>
+		<script src="{{asset('build/js/vendor/pusher.js')}}"></script>
+		<script src="{{asset('build/js/vendor/pusher-angular.min.js')}}"></script>
+		<script src="{{asset('build/js/vendor/angular-ui-notification.min.js')}}"></script>
 
 
 		<script src="{{asset('build/js/app.js')}}"></script>
@@ -152,5 +156,17 @@
 		<script src="{{elixir('js/all.js')}}"></script>
 	@endif
 
+<!--
+<script type="text/javascript">
+		var socket = new Pusher('6d1ac04a0c9ace1add9d');
+		var channel = socket.subscribe('user.1');
+
+		channel.bind('codeproject\\Events\\TaskWasIncluded',
+			function(data){
+					console.log(data);
+			})
+
+</script>
+-->
 </body>
 </html>

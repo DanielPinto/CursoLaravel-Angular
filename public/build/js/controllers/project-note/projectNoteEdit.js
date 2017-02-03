@@ -12,13 +12,13 @@ angular.module('app.controllers')
 
                     ProjectNote.update(
                         {
-                            id: $scope.projectNote.proj_id,
+                            id: $routeParams.id,
                             idNote: $scope.projectNote.id
                         },
                         $scope.projectNote,
 
                         function(){
-                        $location.path('/project/'+$scope.projectNote.proj_id+'/notes');
+                        $location.path('/project/'+$scope.projectNote.project_id+'/notes');
                     });
                 }
             }
